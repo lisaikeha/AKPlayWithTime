@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "PWTHomeViewController.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +15,10 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController:[PWTHomeViewController new]];
+    self.window.rootViewController = navigationVC;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

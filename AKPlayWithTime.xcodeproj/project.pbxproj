@@ -16,6 +16,10 @@
 		D7D933C31D33E4FB0008DB77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7D933C11D33E4FB0008DB77 /* LaunchScreen.storyboard */; };
 		D7D933CE1D33E4FB0008DB77 /* AKPlayWithTimeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D933CD1D33E4FB0008DB77 /* AKPlayWithTimeTests.m */; };
 		D7D933D91D33E4FB0008DB77 /* AKPlayWithTimeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D933D81D33E4FB0008DB77 /* AKPlayWithTimeUITests.m */; };
+		D7D933F51D33ED210008DB77 /* PWTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D933F41D33ED210008DB77 /* PWTHomeViewController.m */; };
+		D7D934011D431B320008DB77 /* PWTHomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D934001D431B320008DB77 /* PWTHomeViewModel.m */; };
+		D7D9340D1D436A360008DB77 /* Event+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D9340A1D436A360008DB77 /* Event+CoreDataProperties.m */; };
+		D7D9340E1D436A360008DB77 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = D7D9340C1D436A360008DB77 /* Event.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,15 @@
 		D7D933D41D33E4FB0008DB77 /* AKPlayWithTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AKPlayWithTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7D933D81D33E4FB0008DB77 /* AKPlayWithTimeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AKPlayWithTimeUITests.m; sourceTree = "<group>"; };
 		D7D933DA1D33E4FB0008DB77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7D933F31D33ED210008DB77 /* PWTHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWTHomeViewController.h; path = Controllers/PWTHomeViewController.h; sourceTree = "<group>"; };
+		D7D933F41D33ED210008DB77 /* PWTHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWTHomeViewController.m; path = Controllers/PWTHomeViewController.m; sourceTree = "<group>"; };
+		D7D933FF1D431B320008DB77 /* PWTHomeViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PWTHomeViewModel.h; path = ViewModel/PWTHomeViewModel.h; sourceTree = "<group>"; };
+		D7D934001D431B320008DB77 /* PWTHomeViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PWTHomeViewModel.m; path = ViewModel/PWTHomeViewModel.m; sourceTree = "<group>"; };
+		D7D934021D4369570008DB77 /* AKPlayWithTime 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "AKPlayWithTime 2.xcdatamodel"; sourceTree = "<group>"; };
+		D7D934091D436A360008DB77 /* Event+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+CoreDataProperties.h"; sourceTree = "<group>"; };
+		D7D9340A1D436A360008DB77 /* Event+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+CoreDataProperties.m"; sourceTree = "<group>"; };
+		D7D9340B1D436A360008DB77 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		D7D9340C1D436A360008DB77 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +121,9 @@
 				D7D933B61D33E4FB0008DB77 /* ViewController.h */,
 				D7D933B71D33E4FB0008DB77 /* ViewController.m */,
 				D7D933B91D33E4FB0008DB77 /* Main.storyboard */,
+				D7D933F71D33ED6B0008DB77 /* Model */,
+				D7D933FE1D431B0C0008DB77 /* ViewModel */,
+				D7D933F61D33ED2E0008DB77 /* Controller */,
 				D7D933BF1D33E4FB0008DB77 /* Assets.xcassets */,
 				D7D933C11D33E4FB0008DB77 /* LaunchScreen.storyboard */,
 				D7D933C41D33E4FB0008DB77 /* Info.plist */,
@@ -141,6 +157,35 @@
 				D7D933DA1D33E4FB0008DB77 /* Info.plist */,
 			);
 			path = AKPlayWithTimeUITests;
+			sourceTree = "<group>";
+		};
+		D7D933F61D33ED2E0008DB77 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D7D933F31D33ED210008DB77 /* PWTHomeViewController.h */,
+				D7D933F41D33ED210008DB77 /* PWTHomeViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		D7D933F71D33ED6B0008DB77 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D7D934091D436A360008DB77 /* Event+CoreDataProperties.h */,
+				D7D9340A1D436A360008DB77 /* Event+CoreDataProperties.m */,
+				D7D9340B1D436A360008DB77 /* Event.h */,
+				D7D9340C1D436A360008DB77 /* Event.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		D7D933FE1D431B0C0008DB77 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D7D933FF1D431B320008DB77 /* PWTHomeViewModel.h */,
+				D7D934001D431B320008DB77 /* PWTHomeViewModel.m */,
+			);
+			name = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,6 +255,7 @@
 				TargetAttributes = {
 					D7D933AC1D33E4FB0008DB77 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 8YMTF95Y54;
 					};
 					D7D933C81D33E4FB0008DB77 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -275,7 +321,11 @@
 			files = (
 				D7D933BE1D33E4FB0008DB77 /* AKPlayWithTime.xcdatamodeld in Sources */,
 				D7D933B81D33E4FB0008DB77 /* ViewController.m in Sources */,
+				D7D933F51D33ED210008DB77 /* PWTHomeViewController.m in Sources */,
+				D7D9340D1D436A360008DB77 /* Event+CoreDataProperties.m in Sources */,
+				D7D9340E1D436A360008DB77 /* Event.m in Sources */,
 				D7D933B51D33E4FB0008DB77 /* AppDelegate.m in Sources */,
+				D7D934011D431B320008DB77 /* PWTHomeViewModel.m in Sources */,
 				D7D933B21D33E4FB0008DB77 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,10 +467,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AKPlayWithTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ake.AKPlayWithTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -428,10 +481,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AKPlayWithTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ake.AKPlayWithTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -523,6 +579,7 @@
 		D7D933BC1D33E4FB0008DB77 /* AKPlayWithTime.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D7D934021D4369570008DB77 /* AKPlayWithTime 2.xcdatamodel */,
 				D7D933BD1D33E4FB0008DB77 /* AKPlayWithTime.xcdatamodel */,
 			);
 			currentVersion = D7D933BD1D33E4FB0008DB77 /* AKPlayWithTime.xcdatamodel */;
