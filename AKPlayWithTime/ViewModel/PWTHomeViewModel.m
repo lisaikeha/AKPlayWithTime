@@ -47,6 +47,24 @@ static NSUInteger const kDefaultLimit = 5;
     }
 }
 
+- (void)removeAllEvents {
+    NSManagedObjectContext *context = [(AppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    NSError *error;
+    NSArray<Event *> *itemToDelete = [self _fetchEventsAtPage:0 error:&error];
+    if (error) {
+        NSLog(@"fetch data error:%@", error);
+        return;
+    }
+    for (Event *event in itemToDelete) {
+        [context deleteObject:event];
+    }
+    [context save:&error];
+    if (error) {
+        NSLog(@"delete save error:%@", error);
+    }
+    
+}
+
 - (void)reloadDataWithCompletion:(void (^)(NSError *, NSArray<Event *> *))completionBlock {
     _loadAtPage = 0;
     [self loadNextPageWithCompletion:completionBlock];

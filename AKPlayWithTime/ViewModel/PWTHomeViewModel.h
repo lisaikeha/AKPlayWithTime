@@ -14,11 +14,13 @@
 @property (nonatomic, copy  ) NSArray<Event *> *events;
 @property (nonatomic, assign, readonly) NSUInteger loadAtPage;
 
+// persistence access
 - (void)addEventWithContent:(NSString *)content
                   startTime:(NSDate *)start
                     endTime:(NSDate *)end;
 - (void)removeEvent:(Event *)event;
-
+- (void)removeAllEvents;
+// fetch data
 - (void)reloadDataWithCompletion:(void(^)(NSError *error, NSArray<Event *> *array))completionBlock;
 - (void)loadNextPageWithCompletion:(void(^)(NSError *error, NSArray<Event *> *array))completionBlock;
 

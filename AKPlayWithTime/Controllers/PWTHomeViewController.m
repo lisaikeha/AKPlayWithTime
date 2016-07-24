@@ -47,11 +47,9 @@ static NSString * const kUserDefaultsStartTimeKey = @"kUserDefaultsStartTimeKey"
     [self.view addSubview:self.button];
     [self.navigationController.view addSubview:self.maskView];
     [self.navigationController.view addSubview:self.textView];
+    [self setupClearEventsButton];
     [self setButtonStatus:_started];
-    [self.viewModel reloadDataWithCompletion:^(NSError *error, NSArray<Event *> *array) {
-        self.viewModel.events = array;
-        [self.tableView reloadData];
-    }];
+    [self reloadData];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -64,16 +62,12 @@ static NSString * const kUserDefaultsStartTimeKey = @"kUserDefaultsStartTimeKey"
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if ([text isEqualToString:@"\n"]) {
-        [self hideTextView];
         [self.viewModel addEventWithContent:self.textView.text startTime:_startTime endTime:_endTime];
-        [self.viewModel reloadDataWithCompletion:^(NSError *error, NSArray<Event *> *array) {
-            self.viewModel.events = array;
-            [self.tableView reloadData];
-        }];
-        self.textView.text = nil;
+        [self reloadData];
         _startTime = nil;
         _endTime = nil;
         [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kUserDefaultsStartTimeKey];
+        [self hideAndClearTextView];
         return NO;
     }
     return YES;
@@ -161,7 +155,12 @@ static NSString * const kUserDefaultsStartTimeKey = @"kUserDefaultsStartTimeKey"
 }
 
 - (void)maskTapped:(UITapGestureRecognizer *)recognizer {
-    [self hideTextView];
+    [self hideAndClearTextView];
+}
+
+- (void)clearEvents {
+    [self.viewModel removeAllEvents];
+    [self reloadData];
 }
 
 #pragma mark - private
@@ -176,13 +175,14 @@ static NSString * const kUserDefaultsStartTimeKey = @"kUserDefaultsStartTimeKey"
     [self.textView becomeFirstResponder];
 }
 
-- (void)hideTextView {
+- (void)hideAndClearTextView {
     [UIView animateWithDuration:0.25 animations:^{
         self.maskView.alpha = 0;
         CGRect rect = self.textView.frame;
         rect.origin.y = CGRectGetHeight([UIScreen mainScreen].bounds);
         self.textView.frame = rect;
     }];
+    self.textView.text = nil;
     [self.textView resignFirstResponder];
 }
 
@@ -195,6 +195,17 @@ static NSString * const kUserDefaultsStartTimeKey = @"kUserDefaultsStartTimeKey"
         self.button.backgroundColor = [UIColor colorWithRed:84/255.0 green:255/255.0 blue:209/255.0 alpha:1];
         [self.button setTitle:@"开始" forState:UIControlStateNormal];
     }
+}
+
+- (void)setupClearEventsButton {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"清空列表" style:UIBarButtonItemStylePlain target:self action:@selector(clearEvents)];
+}
+
+- (void)reloadData {
+    [self.viewModel reloadDataWithCompletion:^(NSError *error, NSArray<Event *> *array) {
+        self.viewModel.events = array;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - getter
