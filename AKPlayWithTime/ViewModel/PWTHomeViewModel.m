@@ -29,7 +29,7 @@ static NSUInteger const kDefaultLimit = 5;
     NSTimeInterval timeInterval = [end timeIntervalSinceDate:start];
     event.startTime = start;
     event.endTime = end;
-    event.text = [NSString stringWithFormat:@"[%@'%02li]%@(%@~%@)", @((NSInteger)timeInterval/3600), (NSInteger)timeInterval / 60, content, [[self _timeFormatter] stringFromDate:start], [[self _timeFormatter] stringFromDate:end]];
+    event.text = [NSString stringWithFormat:@"[%@'%02li]%@(%@~%@)", @((NSInteger)timeInterval/3600), (NSInteger)timeInterval % 3600 / 60, content, [[self _timeFormatter] stringFromDate:start], [[self _timeFormatter] stringFromDate:end]];
     NSError *error;
     [context save:&error];
     if (error) {

@@ -10,6 +10,7 @@
 //viewmodel
 #import "PWTHomeViewModel.h"
 
+static NSString * const kUserDefaultsStartTimeKey = @"kUserDefaultsStartTimeKey";
 @interface PWTHomeViewController () <UITextViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UILabel *headerView;
@@ -26,10 +27,15 @@
 
 @implementation PWTHomeViewController
 
+- (void)dealloc {
+    
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _started = NO;
+        _startTime = [[NSUserDefaults standardUserDefaults] valueForKey:kUserDefaultsStartTimeKey];
+        _started = _startTime ? YES : NO;
     }
     return self;
 }
@@ -41,6 +47,7 @@
     [self.view addSubview:self.button];
     [self.navigationController.view addSubview:self.maskView];
     [self.navigationController.view addSubview:self.textView];
+    [self setButtonStatus:_started];
     [self.viewModel reloadDataWithCompletion:^(NSError *error, NSArray<Event *> *array) {
         self.viewModel.events = array;
         [self.tableView reloadData];
@@ -64,6 +71,9 @@
             [self.tableView reloadData];
         }];
         self.textView.text = nil;
+        _startTime = nil;
+        _endTime = nil;
+        [[NSUserDefaults standardUserDefaults] setValue:nil forKey:kUserDefaultsStartTimeKey];
         return NO;
     }
     return YES;
@@ -131,8 +141,6 @@
 - (void)buttonAction:(UIButton *)button {
     if (_started) {
         _endTime = [NSDate date];
-        _button.backgroundColor = [UIColor colorWithRed:84/255.0 green:255/255.0 blue:209/255.0 alpha:1];
-        [_button setTitle:@"开始" forState:UIControlStateNormal];
         if ([_endTime timeIntervalSinceDate:_startTime] < 60.0) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"未超过一分钟不予以记录！" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -146,9 +154,9 @@
     }
     else {
         _startTime = [NSDate date];
-        _button.backgroundColor = [UIColor colorWithRed:255/255.0 green:22/255.0 blue:11/255.0 alpha:1];
-        [_button setTitle:@"停止" forState:UIControlStateNormal];
+        [[NSUserDefaults standardUserDefaults] setValue:_startTime forKey:kUserDefaultsStartTimeKey];
     }
+    [self setButtonStatus:!_started];
     _started = !_started;
 }
 
@@ -178,15 +186,24 @@
     [self.textView resignFirstResponder];
 }
 
+- (void)setButtonStatus:(BOOL)on {
+    if (on) {
+        self.button.backgroundColor = [UIColor colorWithRed:255/255.0 green:22/255.0 blue:11/255.0 alpha:1];
+        [self.button setTitle:@"停止" forState:UIControlStateNormal];
+    }
+    else {
+        self.button.backgroundColor = [UIColor colorWithRed:84/255.0 green:255/255.0 blue:209/255.0 alpha:1];
+        [self.button setTitle:@"开始" forState:UIControlStateNormal];
+    }
+}
+
 #pragma mark - getter
 
 - (UIButton *)button {
     if (!_button) {
         _button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
         _button.layer.cornerRadius = 35;
-        _button.backgroundColor = [UIColor colorWithRed:84/255.0 green:255/255.0 blue:159/255.0 alpha:1];
         [_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_button setTitle:@"开始" forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _button;
